@@ -16,7 +16,8 @@
 <?php
 if (isset($_POST['submit'])) {
     $searchForm = "where artist like '%$_POST[searchForm]%'";
-
+} else {
+    $searchForm = "";
 }
 include "conn.php";
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -57,7 +58,6 @@ if ($conn->connect_error) {
 </div>
 </div>
 <?php
-
 $sqlCollection = "SELECT * from collection $searchForm";
 $resultCollection = $conn->query($sqlCollection);
 if ($resultCollection->num_rows > 0) {
