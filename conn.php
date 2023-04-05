@@ -2,5 +2,5 @@
     $servername = getenv('envDbserver');
     $username = getenv('envDbuser');
     $password = getenv('envDbpass');
-    $dbname = getenv('envDbname');
+    $dbname = getenv('envDbnameVinyl');
 ?>
