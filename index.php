@@ -14,6 +14,11 @@
 
 
 <?php
+if (isset($_POST['submit'])) {
+    $searchForm = "where artist like '%$_POST[searchForm]%'";
+} else {
+    $searchForm = "";
+}
 include "conn.php";
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -22,6 +27,20 @@ if ($conn->connect_error) {
 }
 
 ?>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <div class="container">
+    <a class="navbar-brand" href="#">Kevin's Vinyl Collection</a>
+    <form class="d-flex" method="post">
+      <input class="form-control me-2" type="search" placeholder="Search Artist" aria-label="Search Artist" name="searchForm">
+      <button class="btn btn-outline-secondary" type="submit" name="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<nav class="navbar fixed-bottom navbar-light" style="background-color: #e3f2fd;">
+  <div class="container">
+
+  </div>
+</nav>
 <div class="container sticky-top">
   <div class="row">
     <div class="col p-1 bg-secondary text-light rounded-top border">
@@ -39,8 +58,7 @@ if ($conn->connect_error) {
 </div>
 </div>
 <?php
-
-$sqlCollection = "SELECT * from collection order by artist";
+$sqlCollection = "SELECT * from collection $searchForm";
 $resultCollection = $conn->query($sqlCollection);
 if ($resultCollection->num_rows > 0) {
     // output data of each row
